@@ -1,96 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dobby Trading Tool</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  :root{
+    --bg:#0a0d10;
+    --card:#0f1f21;
+    --muted:#93a4a6;
+    --txt:#e7f8ff;
+    --neonA:#35ffb0;
+    --neonB:#00b3ff;
+    --glass: rgba(255,255,255,.08);
+  }
+
+  /* Subtle neon gradient background (multi-layer, low alpha) */
+  body{
+    min-height:100vh; color:var(--txt);
+    background:
+      radial-gradient(600px 320px at 12% 10%, rgba(0,255,200,.06), transparent 60%),
+      radial-gradient(520px 300px at 88% 18%, rgba(0,170,255,.05), transparent 65%),
+      linear-gradient(120deg, #070b0e 0%, #09131a 55%, #07161b 100%);
+  }
+
+  .card{background:linear-gradient(180deg,#102b2e, #0e2325); border:1px solid rgba(255,255,255,.08); box-shadow: 0 10px 30px rgba(0,0,0,.45);}
+  .soft{backdrop-filter: blur(6px); background:var(--glass); border:1px solid rgba(255,255,255,.1)}
+  .neonText{background:linear-gradient(90deg,var(--neonA),var(--neonB)); -webkit-background-clip:text;background-clip:text; color:transparent;}
+  .neonBtn{background:linear-gradient(90deg,var(--neonA),var(--neonB)); color:#041012; font-weight:700; box-shadow:0 0 14px rgba(53,255,176,.45), 0 0 24px rgba(0,179,255,.35);}
+  .neonBtn:hover{filter:brightness(1.06); box-shadow:0 0 18px rgba(53,255,176,.7), 0 0 32px rgba(0,179,255,.55);}
+  .neonBtnGreen{background:linear-gradient(90deg,#2cff8c,#15e7ff); color:#041012; font-weight:700; box-shadow:0 0 14px rgba(44,255,140,.45), 0 0 24px rgba(21,231,255,.35);}
+  .neonBtnGreen:hover{filter:brightness(1.06); box-shadow:0 0 18px rgba(44,255,140,.7), 0 0 32px rgba(21,231,255,.55);}
+  .neonOutline{box-shadow:0 0 0 2px rgba(255,255,255,.06), 0 0 18px rgba(53,255,176,.15), inset 0 0 18px rgba(0,179,255,.08);}
+
+  /* Modals more opaque */
+  .modalShade{background:rgba(5,8,12,.72); backdrop-filter: blur(8px);}
+  .modalShade .soft{background:rgba(18,28,34,.82); border-color:rgba(255,255,255,.14);}
+
+  .xBtn{opacity:.85}
+  .xBtn:hover{opacity:1; filter:drop-shadow(0 0 6px rgba(255,255,255,.6))}
+
+  /* Simulator */
+  .barWrap{
+    height:360px; width:220px; border-radius:14px; overflow:hidden;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(180deg,#062024, #072424);
+    display:flex; flex-direction:column;  /* LONG default */
+  }
+  .barWrap.short{ flex-direction:column-reverse; } /* SHORT: reverse order */
+  .barProfit{height:50%; transition:height .45s ease; background:linear-gradient(180deg,#16ffc5 0%, #00b7ff 100%);}
+  .barEntry{height:2px; background:rgba(255,255,255,.6)}
+  .barRisk{height:50%; transition:height .45s ease; background:linear-gradient(180deg,#89112a 0%, #ff3d6b 100%);}
+  .tag{font-size:.82rem; color:var(--muted)}
+  .metric{font-variant-numeric: tabular-nums; letter-spacing:.2px}
+
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .spin { animation:spin 1.2s linear infinite }
+
+  .marker{position:absolute; left:100%; margin-left:10px; font-size:.78rem; color:#cfeef8; text-shadow:0 0 8px rgba(0,200,255,.4)}
+  .marker::before{content:""; position:absolute; left:-14px; top:50%; transform:translateY(-50%); width:10px; height:2px; background:#cfeef8; opacity:.75}
+  .siteLogoGlow{box-shadow:0 0 12px rgba(0,255,200,.35)}
+  .devBadge strong{background:linear-gradient(90deg,var(--neonA),var(--neonB)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .blurred{filter: blur(4px); pointer-events:none; user-select:none;}
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header id="topbar" class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 flex items-center justify-between gap-3">
+    <!-- Left: tiny site logo button -->
+    <a id="siteLogoBtn" href="#" class="soft siteLogoGlow rounded-xl px-3 py-2 flex items-center gap-2 hover:brightness-110 transition">
+      <!-- logo slightly bigger (container unchanged) -->
+      <img src="https://i.imgur.com/0hLqCYK.png" alt="logo" class="w-7 h-7" />
+      <span class="text-xs text-slate-200">Dobby</span>
+    </a>
+
+    <h1 class="text-center text-xl sm:text-2xl font-extrabold tracking-wide">
+      <span class="neonText">Dobby Risk Management Calculation Tool</span>
+    </h1>
+
+    <button id="btnResetTop" class="neonBtnGreen rounded-xl px-4 py-2 text-sm whitespace-nowrap">New R/R Calculation</button>
+  </header>
+
+  <!-- Main -->
+  <main id="app" class="max-w-6xl mx-auto px-4 sm:px-6 pb-24 pt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Left: Inputs -->
+      <section class="card rounded-2xl p-5 neonOutline">
+        <div class="grid grid-cols-1 gap-4">
+          <label class="text-sm">Select Pair
+            <select id="pair" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-cyan-300">
+              <option>BTC/USDT</option><option>ETH/USDT</option><option>BNB/USDT</option>
+              <option>XRP/USDT</option><option>DOGE/USDT</option><option>SOL/USDT</option>
+            </select>
+          </label>
+          <label class="text-sm">Type Position Entry
+            <input id="entry" inputmode="decimal" type="number" step="any" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-cyan-300" placeholder="Örn: 62000" />
+          </label>
+          <label class="text-sm">Stop Loss Level
+            <input id="stop" inputmode="decimal" type="number" step="any" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-rose-400" placeholder="Örn: 59800" />
+          </label>
+          <label class="text-sm">Take Profit Level
+            <input id="tp" inputmode="decimal" type="number" step="any" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-green-400" placeholder="Örn: 64500" />
+          </label>
+          <label class="text-sm">Money @ Risk
+            <input id="riskMoney" inputmode="decimal" type="number" step="any" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-amber-300" placeholder="Örn: 30" />
+          </label>
+          <label class="text-sm">Position Size (USDT)
+            <input id="posSize" inputmode="decimal" type="number" step="any" class="mt-1 w-full soft rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-lime-300" placeholder="Örn: 100" />
+          </label>
+
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <div class="soft rounded-xl p-3"><div class="tag">Stop % from Entry</div><div id="stopPct" class="metric text-lg font-semibold">—</div></div>
+            <div class="soft rounded-xl p-3"><div class="tag">R Multiple (TP vs Stop)</div><div id="rMulti" class="metric text-lg font-semibold">—</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Simulator -->
+      <section class="card rounded-2xl p-5 neonOutline">
+        <div class="flex items-start gap-6 flex-wrap">
+          <!-- Bar -->
+          <div class="relative barWrap" id="barWrap">
+            <div id="profit" class="barProfit"></div>
+            <div id="entryLine" class="barEntry"></div>
+            <div id="risk" class="barRisk"></div>
+
+            <!-- markers -->
+            <div id="tpMark" class="marker" style="top:8%;">TP: —</div>
+            <div id="entryMark" class="marker" style="top:50%;">Entry: —</div>
+            <div id="stopMark" class="marker" style="bottom:8%;">SL: —</div>
+          </div>
+
+          <!-- Labels -->
+          <div class="flex-1 min-w-[220px]">
+            <div class="soft rounded-xl p-4 space-y-3">
+              <div class="text-sm tag">Selected Pair</div>
+              <div id="pairLabel" class="text-xl font-bold">—</div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div><div class="tag">Entry</div><div id="lblEntry" class="metric text-lg">—</div></div>
+                <div><div class="tag">Stop</div><div id="lblStop" class="metric text-lg">—</div></div>
+                <div><div class="tag">Take Profit</div><div id="lblTP" class="metric text-lg">—</div></div>
+                <div><div class="tag">Leverage Ratio</div><div id="lev" class="metric text-lg">—</div></div>
+              </div>
+
+              <div class="soft rounded-xl p-3">
+                <div class="tag">Potential Earnings (if TP hit)</div>
+                <div id="earn" class="metric text-2xl font-extrabold text-emerald-300">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button id="btnExport" class="neonBtn rounded-xl px-5 py-3 text-sm">Export Position Details</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer badge -->
+  <footer class="fixed right-3 bottom-3 devBadge">
+    <a href="https://x.com/cotantanax" target="_blank" class="soft rounded-xl px-3 py-2 hover:brightness-110 transition">
+      Developed by <strong>Elliottyu</strong>
+    </a>
+  </footer>
+
+  <!-- Intro Modal -->
+  <div id="introShade" class="fixed inset-0 modalShade grid place-items-center z-40">
+    <div class="relative max-w-2xl mx-auto rounded-2xl p-6 soft neonOutline">
+      <button id="introClose" class="absolute right-3 top-3 xBtn text-xl">✕</button>
+      <div class="space-y-3">
+        <h2 class="text-2xl font-extrabold neonText">Welcome to Dobby Risk Management</h2>
+        <p>Follow the instructions and calculate the best position strategy for you!</p>
+        <ul class="list-disc pl-6 space-y-1 text-slate-200">
+          <li>Select pair that you going to open position</li>
+          <li>Enter the values about your position. Risking money, stop margin etc.</li>
+          <li>Tap to the Calculate button</li>
+          <li>Check this X post for more</li>
+        </ul>
+        <div>
+          <a id="xPost" href="https://x.com/" target="_blank" class="neonBtn inline-flex items-center gap-2 rounded-xl px-4 py-2">
+            SentientChat R/R Analysis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7v8" stroke="#041012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay for Export -->
+  <div id="loadingShade" class="hidden fixed inset-0 modalShade grid place-items-center z-50">
+    <div class="grid place-items-center">
+      <img src="https://i.imgur.com/vSAdT1N.png" class="w-20 h-20 spin rounded-full" alt="loading"/>
+      <div class="mt-3 text-sm text-slate-200">Preparing export…</div>
+    </div>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultShade" class="hidden fixed inset-0 modalShade grid place-items-center z-50">
+    <div class="relative w-[min(680px,92vw)] rounded-2xl p-6 soft neonOutline">
+      <button id="resClose" class="absolute right-3 top-3 xBtn text-xl">✕</button>
+      <h3 class="text-2xl font-extrabold mb-4 neonText">Dobby R/R Calculation Results</h3>
+
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="soft rounded-xl p-4"><div class="tag">Leverage Ratio</div><div id="resLev" class="metric text-2xl font-bold">—</div></div>
+        <div class="soft rounded-xl p-4"><div class="tag">Potential Earnings</div><div id="resEarn" class="metric text-2xl font-bold text-emerald-300">—</div></div>
+        <div class="soft rounded-xl p-4"><div class="tag">Stop Loss Level</div><div id="resSL" class="metric text-2xl font-bold text-rose-300">—</div></div>
+      </div>
+
+      <p class="italic mt-4 text-slate-300">respect your stop level</p>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <button id="btnResetModal" class="neonBtnGreen rounded-xl px-4 py-2">New R/R Calculation</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const e = id => document.getElementById(id);
+
+  const pair = e('pair'), entry = e('entry'), stop = e('stop'), tp = e('tp');
+  const riskMoney = e('riskMoney'), posSize = e('posSize');
+
+  const stopPct = e('stopPct'), rMulti = e('rMulti'), pairLabel = e('pairLabel');
+  const lblEntry = e('lblEntry'), lblStop = e('lblStop'), lblTP = e('lblTP'), levLbl = e('lev'), earnLbl = e('earn');
+
+  const barWrap = e('barWrap'), profitBar = e('profit'), riskBar = e('risk');
+  const tpMark = e('tpMark'), entryMark = e('entryMark'), stopMark = e('stopMark');
+
+  const btnExport = e('btnExport'), loadingShade = e('loadingShade'), resultShade = e('resultShade');
+  const resLev = e('resLev'), resEarn = e('resEarn'), resSL = e('resSL');
+
+  const introShade = e('introShade'), introClose = e('introClose');
+  const btnResetTop = e('btnResetTop'), btnResetModal = e('btnResetModal'), resClose = e('resClose');
+
+  const mainPieces = [e('topbar'), e('app')];
+  const setIntroVisible = vis => { introShade.classList.toggle('hidden', !vis); mainPieces.forEach(n => n.classList.toggle('blurred', vis)); };
+  setIntroVisible(true); introClose.addEventListener('click', ()=> setIntroVisible(false));
+
+  const fmt = (v, d=2) => isFinite(v) ? Number(v).toFixed(d) : '—';
+  const $ = s => document.querySelector(s);
+
+  function compute(){
+    const p = pair.value;
+    const en = parseFloat(entry.value);
+    const sl = parseFloat(stop.value);
+    const take = parseFloat(tp.value);
+    const risk$ = parseFloat(riskMoney.value);
+    const size$ = parseFloat(posSize.value);
+
+    pairLabel.textContent = p;
+    lblEntry.textContent = isFinite(en) ? en : '—';
+    lblStop.textContent  = isFinite(sl) ? sl : '—';
+    lblTP.textContent    = isFinite(take) ? take : '—';
+
+    if([en, sl, take].some(v => !isFinite(v))){ return; }
+
+    const isLong = take >= en;                   // direction
+    barWrap.classList.toggle('short', !isLong);  // flip for SHORT
+
+    const stopDist = Math.abs(en - sl);
+    const profDist = Math.abs(take - en);
+
+    const stopPctVal = en ? (stopDist / en) * 100 : 0;
+    stopPct.textContent = fmt(stopPctVal, 2) + '%';
+
+    const r = stopDist ? (profDist / stopDist) : 0;
+    rMulti.textContent = isFinite(r) ? fmt(r, 2) + 'R' : '—';
+
+    const earn = isFinite(risk$) ? risk$ * r : NaN;
+    earnLbl.textContent = isFinite(earn) ? ('$' + fmt(earn, 2)) : '—';
+
+    let lev = NaN;
+    if(isFinite(risk$) && stopPctVal>0){
+      const base = risk$ / stopPctVal;                       // 50 / 5 = 10
+      const scale = isFinite(size$) && size$>0 ? (100/size$) : 1;
+      lev = base * scale;
+    }
+    levLbl.textContent = isFinite(lev) ? fmt(lev,2) + 'x' : '—';
+
+    // Bar geometry
+    const total = stopDist + profDist;
+    const barH = $('.barWrap').clientHeight;
+    const minH = 18;
+    let riskH = total ? (stopDist/total)*barH : barH/2;
+    let profH = total ? (profDist/total)*barH : barH/2;
+    riskH = Math.max(minH, riskH); profH = Math.max(minH, profH);
+    const scale = barH / (riskH + profH); riskH *= scale; profH *= scale;
+
+    profitBar.style.height = profH + 'px';
+    riskBar.style.height   = riskH + 'px';
+
+    // Marker positions depend on direction
+    if(isLong){
+      tpMark.style.top    = (profH * 0.08) + 'px';
+      entryMark.style.top = (profH) + 'px';
+      stopMark.style.top  = (profH + riskH * 0.92) + 'px';
+    }else{
+      // SHORT: risk (SL) segment is on top, profit at bottom
+      stopMark.style.top  = (riskH * 0.08) + 'px';
+      entryMark.style.top = (riskH) + 'px';
+      tpMark.style.top    = (riskH + profH * 0.92) + 'px';
+    }
+
+    tpMark.textContent = 'TP: ' + (isFinite(take) ? take : '—');
+    entryMark.textContent = 'Entry: ' + (isFinite(en) ? en : '—');
+    stopMark.textContent = 'SL: ' + (isFinite(sl) ? sl : '—');
+
+    compute._snapshot = {
+      lev: isFinite(lev)? fmt(lev,2)+'x' : '—',
+      earn: isFinite(earn)? '$'+fmt(earn,2) : '—',
+      sl: isFinite(sl)? sl : '—'
+    };
+  }
+
+  [pair, entry, stop, tp, riskMoney, posSize].forEach(i => i.addEventListener('input', compute));
+  compute();
+
+  function resetAll(){
+    pair.selectedIndex = 0;
+    entry.value = ''; stop.value=''; tp.value='';
+    riskMoney.value=''; posSize.value='';
+    stopPct.textContent='—'; rMulti.textContent='—';
+    pairLabel.textContent='—';
+    lblEntry.textContent=lblStop.textContent=lblTP.textContent='—';
+    levLbl.textContent='—'; earnLbl.textContent='—';
+    barWrap.classList.remove('short');
+    profitBar.style.height='50%'; riskBar.style.height='50%';
+    tpMark.textContent='TP: —'; entryMark.textContent='Entry: —'; stopMark.textContent='SL: —';
+  }
+
+  btnResetTop.addEventListener('click', resetAll);
+  btnResetModal.addEventListener('click', ()=>{ resetAll(); resultShade.classList.add('hidden'); });
+
+  btnExport.addEventListener('click', ()=>{
+    if(!entry.value || !stop.value || !tp.value || !riskMoney.value || !posSize.value){
+      alert('Please fill all area');
+      return;
+    }
+    loadingShade.classList.remove('hidden');
+    setTimeout(()=>{
+      loadingShade.classList.add('hidden');
+      const s = compute._snapshot || {lev:'—', earn:'—', sl:'—'};
+      resLev.textContent = s.lev; resEarn.textContent = s.earn; resSL.textContent = s.sl;
+      resultShade.classList.remove('hidden');
+    }, 3000);
+  });
+
+  resClose.addEventListener('click', ()=> resultShade.classList.add('hidden'));
+</script>
+</body>
 </html>
